@@ -1,0 +1,19 @@
+{
+  "properties": [
+    {
+      "name": "app.security.required-role",
+      "type": "java.lang.String",
+      "description": "Role required to access secured endpoints in the frontend application. Defaults to 'my-role'."
+    },
+    {
+      "name": "calendar.service.url",
+      "type": "java.lang.String",
+      "description": "Base URL of the calendar service used by the frontend. Defaults to 'http://localhost:9090'."
+    },
+    {
+      "name": "app.security.require-2fa",
+      "type": "java.lang.String",
+      "description": "Flag to enforce two-factor authentication (2FA). Set to 'true' to require 2FA, else 'false'."
+    }
+  ]
+}

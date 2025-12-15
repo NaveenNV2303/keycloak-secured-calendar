@@ -1,0 +1,31 @@
+# Maven build folders
+target/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+*.env
+
+# Spring Boot logs
+spring.log
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# Compiled classes
+*.class

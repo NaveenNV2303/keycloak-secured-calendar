@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Frontend App - User Dashboard</title>
+
+    <!-- Link to external CSS for styling -->
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+</head>
+
+<body>
+
+<header>
+    <!-- Main page header -->
+    <h1>Frontend App – User Dashboard</h1>
+</header>
+
+<!-- Logout form (visible only if user is authenticated) -->
+<form th:action="@{/logout}" method="post" class="logout-form" th:if="${user != null}">
+    <button type="submit" aria-label="Logout from application">Logout</button>
+</form>
+
+<!-- Main container for authenticated users -->
+<div class="container" th:if="${user != null}">
+
+    <!-- User information section -->
+    <section class="userinfo">
+        <p>Welcome, <span class="value" th:text="${user.preferredUsername}">User</span></p>
+        <p><strong>Full Name:</strong>
+            <span class="value" th:text="${user.fullName}">Full Name</span>
+        </p>
+        <p><strong>Email:</strong>
+            <span class="value" th:text="${user.email}">email@example.com</span>
+        </p>
+
+        <!-- User roles displayed as pills -->
+        <p><strong>Roles:</strong></p>
+        <ul class="roles">
+            <li th:each="role : ${roles}" th:text="${role}">ROLE</li>
+        </ul>
+    </section>
+
+    <!-- Calendar events section -->
+    <section>
+        <div class="calendar-header">
+            <h2>Calendar Events</h2>
+
+            <!-- Button to fetch calendar events by submitting GET to /calendar -->
+            <form th:action="@{/calendar}" method="get">
+                <button type="submit" class="calendar-btn" aria-label="Fetch calendar events">
+                    Fetch Events
+                </button>
+            </form>
+        </div>
+
+        <!-- Message shown when no calendar events are available -->
+        <div th:if="${calendarEvents == null or #lists.isEmpty(calendarEvents)}"
+             class="no-data" role="alert" aria-live="polite">
+            No calendar events available.
+        </div>
+
+        <!-- Table showing calendar events if present -->
+        <table class="calendar-table"
+               th:if="${calendarEvents != null and !#lists.isEmpty(calendarEvents)}"
+               aria-describedby="calendarEventsCaption">
+            <caption id="calendarEventsCaption" class="sr-only">User calendar events</caption>
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Title</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="event : ${calendarEvents}">
+                    <td th:text="${event.id}">1</td>
+                    <td th:text="${#temporals.format(event.time, 'dd MMM yyyy HH:mm')}">
+                        15 Dec 2025 23:17
+                    </td>
+                    <td th:text="${event.title}">Meeting</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+</div>
+
+<!-- Container shown to unauthenticated users -->
+<div class="container" th:if="${user == null}">
+    <p>You are not logged in.</p>
+    <a th:href="@{/oauth2/authorization/keycloak}" class="login-btn" aria-label="Login with Keycloak">
+        Login with Keycloak
+    </a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Access Denied</title>
+    <link rel="stylesheet" th:href="@{/css/access-denied.css}" />
+</head>
+<body>
+    <!-- Access denied message -->
+    <h2 id="accessDeniedTitle" class="alert alert-danger" aria-live="assertive">Access Denied</h2>
+    
+    <p>You are logged in but do not have permission to access this application.</p>
+    
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" aria-label="Logout from application">Logout</button>
+    </form>
+</body>
+</html>
