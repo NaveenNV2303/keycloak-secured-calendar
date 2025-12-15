@@ -30,6 +30,11 @@ This project demonstrates securing microservices using Keycloak and OpenID Conne
   * Roles (e.g., `my-role`)
   * Users assigned appropriate roles
 
+⚠️ Keycloak setup is required before running the applications.
+A preconfigured realm export is provided for easy setup.
+
+👉 Follow the detailed instructions in keycloak/README.md
+
 ---
 
 ## Setup & Run
@@ -41,20 +46,10 @@ git clone https://github.com/NaveenNV2303/keycloak-secured-calendar.git
 cd keycloak-secured-calendar
 ```
 
-### 2. Run Keycloak in Docker (optional)
-
-```bash
-docker run -d --name keycloak \
-  -p 8080:8080 \
-  -e KEYCLOAK_ADMIN=admin \
-  -e KEYCLOAK_ADMIN_PASSWORD=adminpassword \
-  quay.io/keycloak/keycloak:21.1.1 start-dev
-```
-
 Access Keycloak admin at [http://localhost:8080](http://localhost:8080)
 Login with `admin / adminpassword` (change for production)
 
-### 3. Set environment variable for client secret
+### 2. Set environment variable for client secret
 
 Replace `your-client-secret` with your actual **frontend-app** client secret from Keycloak.
 
@@ -70,7 +65,7 @@ export SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENT_SECRET=your-cl
 $env:SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENT_SECRET="your-client-secret"
 ```
 
-### 4. Build and run the applications
+### 3. Build and run the applications
 
 **Frontend App**
 
@@ -88,7 +83,7 @@ mvn clean install
 mvn spring-boot:run
 ```
 
-### 5. Access the frontend application
+### 4. Access the frontend application
 
 Open your browser and navigate to:
 
